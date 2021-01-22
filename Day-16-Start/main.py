@@ -1,14 +1,20 @@
-from turtle import Turtle, Screen
+# from turtle import Turtle, Screen
+#
+# don = Turtle()
+# my_screen = Screen()
+# don.shape('turtle')
+# don.color('purple4')
+# don.pencolor('red1')
+# don.forward(210)
+# don.right(90)
+# don.pencolor('green3')
+# don.forward(60)
+#
+# my_screen.exitonclick()
 
-don = Turtle()
-my_screen = Screen()
-don.shape('turtle')
-don.color('purple4')
-don.pencolor('red1')
-don.forward(210)
-don.right(90)
-don.pencolor('green3')
-don.forward(60)
+from prettytable import PrettyTable
 
-my_screen.exitonclick()
-
+table = PrettyTable()
+table.add_column('Pokemon Name', ['Pikacu', 'Squirtle', 'Charmander'])
+table.add_column('Type', ['Electric', 'Water', 'Fire'])
+print(table)
