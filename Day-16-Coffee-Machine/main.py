@@ -6,10 +6,10 @@ from money_machine import MoneyMachine
 menu = Menu()
 
 # Creates the Resource object.
-coffee_machine = CoffeeMaker()
+coffee_maker = CoffeeMaker()
 
 # Creates the Money object.
-money = MoneyMachine()
+money_machine = MoneyMachine()
 
 # Variable used to turn machine off. Default is True
 is_on = True
@@ -25,12 +25,12 @@ while is_on:
     # report is a hidden choice.
     elif choice == 'report':
         print('\nReport: ')
-        coffee_machine.report()
-        money.report()
+        coffee_maker.report()
+        money_machine.report()
     elif choice not in menu.get_items():
         print("I didn't understand your choice.")
     else:
         drink = menu.find_drink(choice)
-        if coffee_machine.is_resource_sufficient(drink):
-            if money.make_payment(drink.cost):
-                coffee_machine.make_coffee(drink)
+        if coffee_maker.is_resource_sufficient(drink):
+            if money_machine.make_payment(drink.cost):
+                coffee_maker.make_coffee(drink)
