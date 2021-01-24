@@ -14,13 +14,14 @@ painting_colors = [(247, 238, 242), (239, 246, 243), (131, 166, 205), (222, 148,
 
 don = Turtle()
 don.hideturtle()
+don.speed('fastest')
 don.penup()
 screen = Screen()
 screen.colormode(255)
 
 
-y = 290.00
-x = -290.00
+y = 260.00
+x = -260.00
 
 
 def create_dots(x, y):
