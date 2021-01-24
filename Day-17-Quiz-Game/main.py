@@ -9,10 +9,7 @@ for i in question_data:
 
 quiz_brain = QuizBrain(question_bank)
 
-start = 0
-
-while start < len(question_bank):
+while quiz_brain.still_has_questions():
     quiz_brain.next_question()
-    start += 1
 
 print("Game is completed. Your final score is {c}/{qn}".format(c=quiz_brain.correct, qn=quiz_brain.question_number))
