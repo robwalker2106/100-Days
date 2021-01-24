@@ -3,7 +3,7 @@ from random import randint, choice
 
 don = Turtle()
 
-don.shape('turtle')
+#don.shape('turtle')
 don.color('purple3')
 #don.width(10)
 don.speed('fastest')
@@ -38,7 +38,7 @@ def spirograph(circles, radius):
         don.circle(radius)
 
 
-spirograph(120, 200)
+spirograph(120, 150)
 
 
 # def short_walk():
