@@ -12,10 +12,13 @@ class QuizBrain:
         question = self.question_list[self.question_number]
         self.question_number += 1
         user_answer = input('Q' + str(self.question_number) + ': ' + question.text + '(True/False): ')
-        if question.answer == user_answer:
-            self.correct += 1
-            print("You got it right!\nThe correct answer was: {a}.".format(a=question.answer))
-        else:
-            print("Sorry, that was incorrect.\nThe correct answer was: {a}.".format(a=question.answer))
+        self.check_answer(question, user_answer)
         print('Your current score is: {c}/{qn}.\n'.format(c=self.correct, qn=self.question_number))
 
+    def check_answer(self, question, user_answer):
+        if question.answer.lower() == user_answer.lower() or question.answer.lower()[0] == user_answer.lower()[0]:
+            self.correct += 1
+            print("You got it right!")
+        else:
+            print("Sorry, that was incorrect.")
+        print("The correct answer was: {a}.".format(a=question.answer))
