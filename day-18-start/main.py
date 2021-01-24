@@ -1,9 +1,15 @@
 from turtle import Turtle, Screen
 
-don_the_turtle = Turtle()
+don = Turtle()
 
-don_the_turtle.shape('turtle')
-don_the_turtle.color('purple3')
+don.shape('turtle')
+don.color('purple3')
+don.pencolor('red2')
+
+for _ in range(4):
+    don.forward(40)
+    don.right(90)
+
 
 
 
