@@ -11,8 +11,8 @@ quiz_brain = QuizBrain(question_bank)
 
 start = 0
 
-while start <= len(question_bank):
-    question = quiz_brain.next_question()
-    correct = question.answer
-    answer = input('Q' + str(quiz_brain.question_number) + '. ' + question.text + '(True/False): ')
-    print(correct == answer)
+while start < len(question_bank):
+    quiz_brain.next_question()
+    start += 1
+
+print("Game is completed. Your final score is {c}/{qn}".format(c=quiz_brain.correct, qn=quiz_brain.question_number))
