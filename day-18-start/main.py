@@ -23,21 +23,22 @@ def random_color():
     return r, g, b
 
 
-def spirograph(circles):
+def spirograph(circles, radius):
     """
-    Takes an integer and creates a spirograph with the inputted amount of circles, each
-    with random line colors.
+    Creates a spirograph with the inputted amount of circles, each
+    with random line colors and equal radius size.
     :param circles: int
-    :return: None
+    :param radius: int
+    :return:
     """
     angles = 360 / circles
     for _ in range(circles):
         don.setheading(don.heading() + angles)
         don.pencolor(random_color())
-        don.circle(100)
+        don.circle(radius)
 
 
-spirograph(120)
+spirograph(120, 200)
 
 
 # def short_walk():
