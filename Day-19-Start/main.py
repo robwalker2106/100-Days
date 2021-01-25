@@ -23,6 +23,9 @@ def counterclockwise():
 
 def clear():
     don.clear()
+    don.penup()
+    don.home()
+    don.penup()
 
 
 screen.listen()
