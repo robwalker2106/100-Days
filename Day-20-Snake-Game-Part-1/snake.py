@@ -1,10 +1,11 @@
 from turtle import Turtle
-
+MOVE_DISTANCE = 20
+START_POSITION = [0, 0]
 
 class Snake:
     def __init__(self):
-        self.x_start = 0
-        self.y_start = 0
+        self.x_start = START_POSITION[0]
+        self.y_start = START_POSITION[1]
         self.snake_body = []
 
     def starting_position(self):
@@ -28,7 +29,7 @@ class Snake:
         for i in range(len(self.snake_body)):
             self.snake_body[-i].goto(x, y)
 
-        self.snake_body[0].forward(20)
+        self.snake_body[0].forward(MOVE_DISTANCE)
 
     def turn_up(self):
         self.snake_body[0].setheading(90)
