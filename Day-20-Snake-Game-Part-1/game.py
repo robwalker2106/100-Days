@@ -1,6 +1,7 @@
 from turtle import Screen
 from snake import Snake
 from food import Food
+from score import Score
 import time
 
 
@@ -13,6 +14,7 @@ def start():
     game_speed = screen.numinput('Game Speed', 'How fast is this game? 1 - 20 (lowest number is slowest')
     snake = Snake(game_speed)
     food = Food()
+    score = Score()
     screen.listen()
     screen.onkey(snake.turn_up, 'Up')
     screen.onkey(snake.turn_left, 'Left')
@@ -27,5 +29,7 @@ def start():
         if snake.head.distance(food) < 15:
             food.move_food()
             snake.grow()
+            score.gain_point()
+            print(score.amount)
 
     screen.exitonclick()
