@@ -31,3 +31,16 @@ def starting_position(a, b):
         start_x -= 20
 
     return snake_body
+
+
+def move_snake(snake_body):
+    """
+    Receives the list of Turtle() objects and move all of them by 5 paces.
+    :param snake_body: List of Turtle() objects
+    :return: None
+    """
+
+    for segment in snake_body:
+        segment.forward(5)
+
+
