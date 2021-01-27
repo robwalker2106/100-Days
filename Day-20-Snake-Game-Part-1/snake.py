@@ -16,9 +16,9 @@ class Snake:
 
     def starting_position(self):
 
-        self.snake_body.append(self.create_segment())
-        self.snake_body.append(self.create_segment())
-        self.snake_body.append(self.create_segment())
+        self.create_segment()
+        self.create_segment()
+        self.create_segment()
 
     def create_segment(self):
 
@@ -27,17 +27,26 @@ class Snake:
         turtle.penup()
 
         if len(self.snake_body) == 0:
-            return turtle
+            self.snake_body.append(turtle)
         elif len(self.snake_body) == 1:
             turtle.setheading(self.snake_body[0].heading())
             turtle.goto(self.snake_body[0].position())
-            turtle.backward(self.move_distance)
-            return turtle
+            turtle.backward(20)
+            self.snake_body.append(turtle)
         else:
             turtle.setheading(self.snake_body[-1].heading())
             turtle.goto(self.snake_body[-1].position())
-            turtle.backward(20)
-            return turtle
+            turtle.backward(50)
+            self.snake_body.append(turtle)
+
+    def grow(self):
+        turtle = Turtle(shape='square')
+        turtle.color('white')
+        turtle.penup()
+        turtle.setheading(self.snake_body[-1].heading())
+        turtle.goto(self.snake_body[-1].position())
+        turtle.backward(50)
+        self.snake_body.append(turtle)
 
     def move(self):
         x, y = self.head.position()
