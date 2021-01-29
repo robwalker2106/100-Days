@@ -1,15 +1,20 @@
 from turtle import Turtle
 
 
-class Ball:
+class Ball(Turtle):
 
     def __init__(self):
-        self.ball = Turtle('circle')
-        self.ball.color('white')
-        self.ball.penup()
-        self.ball.goto(0, 0)
-        self.ball.setheading(35)
+        super().__init__()
+        self.shape('circle')
+        self.color('white')
+        self.penup()
+        self.goto(0, 0)
+        self.setheading(65)
 
     def move_ball(self):
-        self.ball.forward(20)
+        self.forward(10)
+
+    def change_direction(self):
+        if 90 > self.heading() > 0:
+            self.setheading(self.heading() - 90)
 

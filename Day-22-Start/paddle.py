@@ -1,20 +1,20 @@
 from turtle import Turtle
 
 
-class Paddle:
+class Paddle(Turtle):
     def __init__(self, starting_position):
-        self.paddle = Turtle()
-        self.paddle.shape('square')
-        self.paddle.color('white')
-        self.paddle.shapesize(stretch_wid=1, stretch_len=5)
-        self.paddle.penup()
-        self.paddle.setheading(90)
-        self.paddle.goto(starting_position)
+        super().__init__()
+        self.shape('square')
+        self.color('white')
+        self.shapesize(stretch_wid=1, stretch_len=5)
+        self.penup()
+        self.setheading(90)
+        self.goto(starting_position)
 
     def move_wall_up(self):
-        self.paddle.setheading(90)
-        self.paddle.forward(20)
+        self.setheading(90)
+        self.forward(20)
 
     def move_wall_down(self):
-        self.paddle.setheading(270)
-        self.paddle.forward(20)
+        self.setheading(270)
+        self.forward(20)
