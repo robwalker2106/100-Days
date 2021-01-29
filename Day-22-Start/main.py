@@ -33,11 +33,17 @@ while game_on:
 
     if ball.xcor() >= 360 and ball.distance(r_paddle) < 50:
         ball.bounce_paddle()
-        score.player_2_score()
 
     if ball.xcor() <= -360 and ball.distance(l_paddle) < 50:
         ball.bounce_paddle()
+
+    if ball.xcor() > 400:
+        ball.ball_reset()
         score.player_1_score()
+
+    if ball.xcor() < -400:
+        ball.ball_reset()
+        score.player_2_score()
 
 
 

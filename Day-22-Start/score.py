@@ -11,6 +11,7 @@ class Score(Turtle):
         self.penup()
         self.goto(0, 290)
         self.color('white')
+        self.hideturtle()
         self.l_paddle = 0
         self.r_paddle = 0
         self.print_score()
