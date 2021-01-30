@@ -7,8 +7,28 @@ from scoreboard import Scoreboard
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
+player = Player()
+cars = CarManager()
+score = Scoreboard()
+
+
+screen.listen()
+screen.onkey(player.move, 'Up')
 
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
+    cars.move_cars()
     screen.update()
+
+    if cars.hit(player):
+        score.game_over()
+        game_is_on = False
+
+    if player.score():
+        score.scored()
+        cars.move_distance += 2
+        cars.change_position()
+
+screen.exitonclick()
+
