@@ -19,7 +19,6 @@ class Snake:
 
         for position in POSITION:
             self.create_segment(position)
-        print(self.snake_body[-1].pos())
 
     def create_segment(self, position):
 
@@ -55,3 +54,12 @@ class Snake:
     def turn_right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def reset(self):
+        for snake in self.snake_body:
+            snake.goto(-350, 0)
+        self.snake_body.clear()
+        self.starting_position()
+        self.head = self.snake_body[0]
+        self.tail = self.snake_body[-1]
+

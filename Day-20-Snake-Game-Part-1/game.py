@@ -53,12 +53,12 @@ def start():
             print(score.amount)
 
         if snake.head.xcor() <= -260 or snake.head.xcor() >= 260 or snake.head.ycor() >= 260 or snake.head.ycor() <= -260:
-            score.game_over()
-            game_on = False
+            score.reset()
+            snake.reset()
 
         for segment in snake.snake_body[1:]:
             if snake.head.distance(segment) < 10:
-                score.game_over()
-                game_on = False
+                score.reset()
+                snake.reset()
 
     screen.exitonclick()
