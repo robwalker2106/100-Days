@@ -11,8 +11,6 @@ class Score(Turtle):
         self.color('white')
         self.hideturtle()
         self.penup()
-        self.high_score = ""
-
 
         with open('high_score.txt', 'r') as file:
             high = file.read()
