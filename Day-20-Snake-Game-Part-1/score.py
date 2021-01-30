@@ -8,11 +8,16 @@ class Score(Turtle):
     def __init__(self):
         super().__init__()
         self.amount = 0
-        #self.score = "Current score: {amount}".format(amount=self.amount)
         self.color('white')
         self.hideturtle()
-        self.high_score = 0
         self.penup()
+        self.high_score = ""
+
+
+        with open('high_score.txt', 'r') as file:
+            high = file.read()
+            self.high_score = high
+
         self.print_score()
 
     def print_score(self):
@@ -26,9 +31,14 @@ class Score(Turtle):
         self.print_score()
 
     def reset(self):
-        if self.amount >= self.high_score:
+        if self.amount >= int(self.high_score):
             self.high_score = self.amount
-            self.print_score()
+
+            with open('high_score.txt', 'w') as file:
+                file.write(str(self.high_score))
+
         self.amount = 0
+        self.print_score()
+
 
 
