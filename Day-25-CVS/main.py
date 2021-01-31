@@ -14,4 +14,9 @@ import pandas as pd
 
 weather_data = pd.read_csv('weather_data.csv')
 
-print(weather_data['temp'])
+print(weather_data)
+
+weather_data.temp = weather_data.apply(lambda x: (int(x.temp) * 9/5) + 32, axis=1)
+
+print(weather_data)
+
