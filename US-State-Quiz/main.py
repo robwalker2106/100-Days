@@ -19,10 +19,13 @@ while score.score < 50:
     guess = screen.textinput("Input the name of a state.", " ")
     print(guess.title())
 
+    if guess.lower() == 'exit':
+        break
+
     if guess.title() in states.state_dic.keys():
         states.name_found(guess)
         score.add_point()
 
-
-
+states.review()
 screen.exitonclick()
+
