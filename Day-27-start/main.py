@@ -1,11 +1,9 @@
-import tkinter
+def add(*args):
+    sum = 0
+    for x in args:
+        sum += x
 
-window = tkinter.Tk()
-window.title("My First TK program")
-window.minsize(width=500, height=300)
+    return sum
 
 
-my_label = tkinter.Label(text='First label')
-my_label.pack()
-
-window.mainloop()
+print(add(3, 4, 5, 6))
