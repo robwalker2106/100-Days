@@ -21,8 +21,8 @@ Km.grid(column=2, row=3)
 
 
 def calculate():
-    inputed_miles = int(miles_input.get())
-    km = (inputed_miles * 8) / 5
+    inputted_miles = int(miles_input.get())
+    km = (inputted_miles * 8) / 5
     miles_to_km.config(text=km)
 
 
