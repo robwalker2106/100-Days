@@ -18,7 +18,7 @@ while not finished:
         word = input("Enter a word: ").upper()
         output_list = [phonetic_dict[letter] for letter in word]
     except KeyError:
-        print("Only letters allowed.")
+        print("Sorry. Only letters in the alphabet please.")
     else:
         print(output_list)
         finished = True
