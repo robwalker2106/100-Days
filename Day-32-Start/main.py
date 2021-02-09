@@ -3,9 +3,9 @@ import datetime as dt
 from random import choice
 
 my_email = "robwalker8280@gmail.com"
-password = '$xr%M4Z99@A6'
+password = 'blank'
 to_addrs = 'robwalker2106@gmail.com'
-to_sarai = 'saraigomezco18@gmail.com'
+
 
 now = dt.datetime.now()
 
@@ -20,7 +20,3 @@ if now.weekday() == 1:
         connection.sendmail(from_addr=my_email,
                             to_addrs=to_addrs,
                             msg=f"Subject: Papi's Quote of the Day\n\n{quote}")
-        connection.sendmail(from_addr=my_email,
-                            to_addrs=to_sarai,
-                            msg=f"Subject: Today's Quote\n\n{quote}\nBrought to you by Papi's programming studies.")
-
