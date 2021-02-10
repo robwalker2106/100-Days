@@ -1,27 +1,44 @@
-from tkinter import *
 import requests
+import datetime as dt
+import smtplib
 
+#MY_LAT = 25.792240
+MY_LAT = -53.792240
+#MY_LONG = -80.134850
+MY_LONG = 34.134850
 
-def get_quote():
-    response = requests.get(url='https://api.kanye.rest')
-    quote = response.json()['quote']
-    canvas.itemconfig(quote_text, text=quote)
+my_email = "robwalker8280@gmail.com"
+password = 'blank'
+to_addrs = 'robwalker2106@gmail.com'
 
+now = dt.datetime.now()
 
-window = Tk()
-window.title("Kanye Says...")
-window.config(padx=50, pady=50)
+parameters = {
+    'lat': MY_LAT,
+    'lng': MY_LONG,
+    'formatted': 0
+}
 
-canvas = Canvas(width=300, height=414)
-background_img = PhotoImage(file="background.png")
-canvas.create_image(150, 207, image=background_img)
-quote_text = canvas.create_text(150, 207, text="Kanye Quote Goes HERE", width=250, font=("Arial", 30, "bold"), fill="white")
-canvas.grid(row=0, column=0)
+response = requests.get(url="http://api.open-notify.org/iss-now.json")
+response.raise_for_status()
+iss_lat = float(response.json()["iss_position"]['latitude'])
+print(iss_lat)
+iss_lng = float(response.json()["iss_position"]['longitude'])
+print(iss_lng)
 
-kanye_img = PhotoImage(file="kanye.png")
-kanye_button = Button(image=kanye_img, highlightthickness=0, command=get_quote)
-kanye_button.grid(row=1, column=0)
+lat_diff = abs(iss_lat) - abs(MY_LAT)
+lng_diff = abs(iss_lng) - abs(MY_LONG)
 
+response = requests.get(url='http://api.sunrise-sunset.org/json', params=parameters)
+response.raise_for_status()
+sunrise = int(response.json()['results']['sunrise'].split('T')[1].split(":")[0])
+sunset = int(response.json()['results']['sunset'].split('T')[1].split(":")[0])
 
-
-window.mainloop()
+if lat_diff <= 5 and lng_diff <= 5:
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()
+        connection.login(user=my_email, password=password)
+        connection.sendmail(from_addr=my_email,
+                            to_addrs=to_addrs,
+                            msg=f"Look up into the sky. The ISS is near.")
+    print('email sent')
