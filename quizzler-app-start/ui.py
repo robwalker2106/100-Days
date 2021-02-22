@@ -13,8 +13,7 @@ class QuizInterface:
         self.window.title("Quizzler")
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
 
-        self.total_score = 0
-        self.score = Label(text=f"Score {self.total_score}", fg="white", bg=THEME_COLOR)
+        self.score = Label(text="Score 0", fg="white", bg=THEME_COLOR)
         self.score.grid(row=0, column=1)
 
         self.canvas = Canvas(width=300, height=250, bg="white")
@@ -27,7 +26,7 @@ class QuizInterface:
             width=290)
 
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
-        self.get_next_question()
+        # self.get_next_question()
 
         true_image = PhotoImage(file='images/true.png')
         false_image = PhotoImage(file='images/false.png')
@@ -35,32 +34,43 @@ class QuizInterface:
         self.false_button = Button(image=false_image, highlightthickness=0, command=self.answer_false)
         self.true_button.grid(row=2, column=0)
         self.false_button.grid(row=2, column=1)
-
+        self.get_next_question()
 
         self.window.mainloop()
 
     def get_next_question(self):
+        self.end_quiz()
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
 
     def answer_true(self):
         if self.quiz.check_answer('true'):
-            self.total_score += 1
-            self.score.config(text=f"Score {self.total_score}")
-        self.end_quiz()
-        self.get_next_question()
+            self.score.config(text=f"Score {self.quiz.score}")
+            self.check_answer(True)
+        else:
+            self.check_answer(False)
 
     def answer_false(self):
         if self.quiz.check_answer('false'):
-            self.total_score += 1
-            self.score.config(text=f"Score {self.total_score}")
-        self.end_quiz()
-        self.get_next_question()
+            self.score.config(text=f"Score {self.quiz.score}")
+            self.check_answer(True)
+        else:
+            self.check_answer(False)
+
+    def check_answer(self, ans):
+        if ans:
+            self.canvas.configure(bg='green')
+        else:
+            self.canvas.configure(bg='red')
+
+        self.window.after(1000, self.get_next_question)
 
     def end_quiz(self):
-        end_statement = f"You've completed the quiz\n" \
-                        f"Your final score was: {self.total_score}/{self.quiz.question_number}"
+        self.canvas.configure(bg='white')
+        end_statement = "You've completed the quiz"
         if not self.quiz.still_has_questions():
+            self.true_button.config(state='disabled')
+            self.false_button.config(state='disabled')
             self.canvas.itemconfig(self.question_text, text=end_statement)
 
 
