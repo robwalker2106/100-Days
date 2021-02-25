@@ -25,18 +25,19 @@ for weather_id in twelve_hour:
     if weather_id['weather'][0]['id'] < 700:
         umbrella = True
 
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
+twilio_sid = 'TWILIO_ACCOUNT_SID'
+twilio_auth_token = 'TWILIO_AUTH_TOKEN'
+
+account_sid = os.environ[twilio_sid]
+auth_token = os.environ[twilio_auth_token]
 client = Client(account_sid, auth_token)
 
 message = client.messages \
                 .create(
-                     body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+                     body="Make sure to bring an umbrella.",
                      from_='+15017122661',
                      to='+15558675310'
                  )
 
 print(message.sid)
-
-print(umbrella)
 
