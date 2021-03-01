@@ -1,14 +1,50 @@
 import requests
 from datetime import date, timedelta
+from newsapi import NewsApiClient
+from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+
+NEWS_KEY = "key"
+TWILIO_SID = 'AC77dc6aa70731198115a4c4c02afd275f'
+TWILIO_AUTH_TOKEN = 'key'
+
+client = Client(account_sid, auth_token)
+
+
+def send_article(dic):
+    info = f"{STOCK}:  {change}{round(pct_change * 100, 0)}\nHeadline: {dic['title']}\nBrief: {dic['description']}\n" \
+            f"{dic['url']}"
+    message = client.messages \
+        .create(
+        body=info,
+        from_='+15139861124',
+        to='number')
+
+    print(info)
+
+
+def get_news():
+    newsapi = NewsApiClient(api_key=NEWS_KEY)
+
+    all_data = newsapi.get_everything(q=COMPANY_NAME,
+                                          from_param=day_two,
+                                          to=date.today(),
+                                          language='en',
+                                          sort_by='relevancy')
+    all_articles = all_data['articles']
+
+    if len(all_articles) >= 3:
+        return all_articles[:3]
+    else:
+        return all_articles[:len(all_articles)]
 
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 stock_api = "https://www.alphavantage.co/query"
-stock_key = "KEY"
+stock_key = "key"
 
 stock_params= {'apikey': stock_key,
                'function': 'TIME_SERIES_DAILY_ADJUSTED',
@@ -37,15 +73,29 @@ day_one_close = float(stock_data[str(day_one)]['4. close'])
 day_two_close = float(stock_data[str(day_two)]['4. close'])
 
 pct_change = (day_one_close - day_two_close) / day_one_close
-
-if abs(pct_change) >= .05:
-    print("Get News")
+#pct_change = - 0.075
+change = ""
+if pct_change > 0:
+    change = "🔺"
 else:
-    print("Slow day")
+    change = "🔻"
+
+news_data = {}
+if abs(pct_change) >= .05:
+    news_data = get_news()
+else:
+    print(f"{STOCK}:  {change}{round(pct_change * 100, 0)}")
+
+if len(news_data) > 0:
+    for article in news_data:
+        send_article(article)
 
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+
+
+
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
